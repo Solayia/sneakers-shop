@@ -956,6 +956,13 @@ h1, h2, h3 {
     animation: shake 0.5s ease;
 }
 
+.size-error {
+    color: #c00;
+    font-size: 13px;
+    margin-top: 12px;
+    font-weight: 500;
+}
+
 /* --- Notification --- */
 .notification {
     position: fixed;

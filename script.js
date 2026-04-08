@@ -103,10 +103,10 @@
                     <span class="product-card-price">${product.price}\u00A0\u20AC</span>
                 </div>
             </a>
-            <button class="btn-add-to-cart" data-id="${product.id}">AJOUTER AU PANIER</button>
+            <button class="btn-add-to-cart" data-id="${product.id}">CHOISIR MA TAILLE</button>
         `;
-        const btn = card.querySelector('.btn-add-to-cart');
-        btn.addEventListener('click', function (e) {
+        // Click on entire card or button → go to product page to select size
+        card.querySelector('.btn-add-to-cart').addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             window.location.href = 'product.html?id=' + product.id;
@@ -325,8 +325,16 @@
 
         // Add to cart
         document.getElementById('addToCartDetail').addEventListener('click', function () {
+            // Remove previous error
+            const prevError = document.querySelector('.size-error');
+            if (prevError) prevError.remove();
+
             if (!selectedSize) {
-                showNotification('Veuillez sélectionner une taille');
+                // Show visible error message under sizes
+                const errorMsg = document.createElement('p');
+                errorMsg.className = 'size-error';
+                errorMsg.textContent = 'Veuillez sélectionner une taille avant d\'ajouter au panier.';
+                document.querySelector('.size-selector').appendChild(errorMsg);
                 document.querySelector('.size-selector').classList.add('shake');
                 setTimeout(() => document.querySelector('.size-selector').classList.remove('shake'), 600);
                 return;
