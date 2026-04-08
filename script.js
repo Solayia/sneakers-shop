@@ -398,24 +398,59 @@
         });
     }
 
-    /* ===================== NAVBAR SCROLL ===================== */
+    /* ===================== NAVBAR SCROLL (transparent → olive) ===================== */
     let lastScrollY = 0;
     const navbar = document.getElementById('navbar');
+    const scrollIndicator = document.getElementById('scrollIndicator');
     if (navbar) {
         window.addEventListener('scroll', function () {
             const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY && currentScrollY > 80) {
+            // Hide/show navbar on scroll direction
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 navbar.classList.add('navbar-hidden');
             } else {
                 navbar.classList.remove('navbar-hidden');
             }
-            if (currentScrollY > 10) {
+            // Transparent → olive background
+            if (currentScrollY > 50) {
                 navbar.classList.add('navbar-scrolled');
             } else {
                 navbar.classList.remove('navbar-scrolled');
             }
+            // Hide scroll indicator
+            if (scrollIndicator) {
+                if (currentScrollY > 80) {
+                    scrollIndicator.classList.add('hidden');
+                } else {
+                    scrollIndicator.classList.remove('hidden');
+                }
+            }
             lastScrollY = currentScrollY;
         }, { passive: true });
+    }
+
+    /* ===================== SCROLL REVEAL (IntersectionObserver) ===================== */
+    const revealElements = document.querySelectorAll('.reveal');
+    if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+        revealElements.forEach(function (el) {
+            revealObserver.observe(el);
+        });
+    } else {
+        // Fallback: reveal everything immediately
+        revealElements.forEach(function (el) {
+            el.classList.add('revealed');
+        });
     }
 
     /* ===================== NEWSLETTER ===================== */
