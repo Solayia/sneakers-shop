@@ -1,142 +1,287 @@
-/* EDITION — Luxury Sneaker Store */
+/* ÉDITION — Luxury Sneaker Store */
 
 (function () {
     'use strict';
 
-    /* --- Cart counter --- */
-    var cartCount = 0;
-    var cartEls = document.querySelectorAll('#cart-count');
+    /* ===================== PRODUCT DATA ===================== */
+    const products = [
+        {
+            id: 1, brand: "NIKE", name: "Free RN Flyknit", price: 149, img: "img/sneaker-1.jpg",
+            desc: "Le Free RN Flyknit incarne la philosophie de la course naturelle. Son upper en Flyknit épouse le pied comme une seconde peau, offrant légèreté et respirabilité à chaque foulée.",
+            story: "Née en 2012, la gamme Free a révolutionné le running en proposant une semelle flexible qui imite la course pieds nus. Le Flyknit, introduit la même année, a marqué un tournant dans l'industrie avec son tissage haute précision."
+        },
+        {
+            id: 2, brand: "NIKE", name: "Air Force 1 Corduroy", price: 139, img: "img/sneaker-2.jpg",
+            desc: "L'Air Force 1 se réinvente dans une version velours côtelé chaleureuse. Le corduroy marron apporte une touche automnale raffinée à cette silhouette iconique.",
+            story: "Créée en 1982 par Bruce Kilgore, l'Air Force 1 fut la première chaussure de basketball à intégrer la technologie Air. Quarante ans plus tard, elle reste la sneaker la plus vendue au monde."
+        },
+        {
+            id: 3, brand: "NIKE", name: "AF1 Shadow Pastel", price: 129, img: "img/sneaker-3.jpg",
+            desc: "La AF1 Shadow revisite le classique avec des couches superposées et une palette pastel audacieuse. Un design déconstructé qui célèbre la créativité et l'individualité.",
+            story: "La collection Shadow est née d'un programme interne Nike qui encourage les designers à déconstruire les classiques. Chaque couche dédoublée symbolise le fait de toujours se surpasser."
+        },
+        {
+            id: 4, brand: "NIKE", name: "Air Max 1 Ultra", price: 159, img: "img/sneaker-4.jpg",
+            desc: "L'Air Max 1 Ultra allège la silhouette originale tout en conservant la fenêtre Air visible qui a changé l'histoire de la sneaker. Un confort modernisé, un design intemporel.",
+            story: "En 1987, Tinker Hatfield s'inspire du Centre Pompidou à Paris pour créer la première fenêtre Air visible. L'Air Max 1 est née, révolutionnant à jamais le design de chaussures."
+        },
+        {
+            id: 5, brand: "ADIDAS", name: "Ultraboost 23", price: 189, img: "img/sneaker-5.jpg",
+            desc: "L'Ultraboost 23 repousse les limites du confort avec sa semelle Boost intégrale et son upper Primeknit adaptatif. La référence absolue en matière de running premium.",
+            story: "Lancée en 2015, l'Ultraboost a été qualifiée de \u00ab meilleure chaussure de running jamais créée \u00bb par Kanye West, propulsant le modèle au rang d'icône lifestyle mondiale."
+        },
+        {
+            id: 6, brand: "NEW BALANCE", name: "550", price: 129, img: "img/sneaker-6.jpg",
+            desc: "La New Balance 550 ressuscite un modèle de basketball des années 80. Son design rétro épuré et sa silhouette basse en font la sneaker lifestyle parfaite.",
+            story: "Originellement sortie en 1989 comme chaussure de basketball, la 550 a été redécouverte en 2020 grâce à une collaboration avec Aimé Leon Dore, devenant instantanément l'une des sneakers les plus désirées."
+        },
+        {
+            id: 7, brand: "PUMA", name: "Suede Classic", price: 89, img: "img/sneaker-7.jpg",
+            desc: "La Puma Suede Classic est l'essence même du style streetwear. Son daim premium et sa semelle vulcanisée offrent un look authentique qui traverse les décennies.",
+            story: "Née en 1968 comme chaussure de compétition, la Suede est devenue un symbole de la culture hip-hop dans les années 80 quand les B-Boys de New York l'ont adoptée pour danser le breakdance."
+        },
+        {
+            id: 8, brand: "CONVERSE", name: "Chuck 70", price: 94, img: "img/sneaker-8.jpg",
+            desc: "La Chuck 70 revisite la Chuck Taylor All Star originale avec des matériaux premium : toile plus épaisse, semelle en mousse rembourrée, et finitions soignées.",
+            story: "La Chuck Taylor originale date de 1917. La version 70 s'inspire fidèlement du modèle des années 1970, considéré par les puristes comme l'âge d'or de la silhouette."
+        }
+    ];
 
-    function updateCart() {
-        cartEls.forEach(function (el) {
-            el.textContent = cartCount;
+    // Make products accessible globally
+    window.editionProducts = products;
+
+    /* ===================== CART ===================== */
+    function getCart() {
+        try {
+            return JSON.parse(localStorage.getItem('edition_cart')) || [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem('edition_cart', JSON.stringify(cart));
+        updateCartBadge();
+    }
+
+    function addToCart(id, size) {
+        const cart = getCart();
+        const existing = cart.find(item => item.id === id && item.size === size);
+        if (existing) {
+            existing.qty += 1;
+        } else {
+            cart.push({ id: id, size: size, qty: 1 });
+        }
+        saveCart(cart);
+    }
+
+    function getCartCount() {
+        return getCart().reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    function updateCartBadge() {
+        const badges = document.querySelectorAll('.cart-badge');
+        const count = getCartCount();
+        badges.forEach(badge => {
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'flex' : 'none';
         });
     }
 
-    /* --- Toast notification --- */
-    var toast = document.createElement('div');
-    toast.className = 'toast';
-    document.body.appendChild(toast);
-    var toastTimer = null;
-
-    function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add('is-visible');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(function () {
-            toast.classList.remove('is-visible');
-        }, 2200);
-    }
-
-    /* --- Add to cart on product card click --- */
-    var productCards = document.querySelectorAll('[data-add-cart]');
-    productCards.forEach(function (card) {
-        card.addEventListener('click', function (e) {
+    /* ===================== PRODUCT CARD RENDERING ===================== */
+    function createProductCard(product) {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <a href="product.html?id=${product.id}" class="product-card-link">
+                <div class="product-card-image">
+                    <img src="${product.img}" alt="${product.name}" loading="lazy">
+                </div>
+                <div class="product-card-info">
+                    <span class="product-card-brand">${product.brand}</span>
+                    <h3 class="product-card-name">${product.name}</h3>
+                    <span class="product-card-price">${product.price}\u00A0\u20AC</span>
+                </div>
+            </a>
+            <button class="btn-add-to-cart" data-id="${product.id}">AJOUTER AU PANIER</button>
+        `;
+        const btn = card.querySelector('.btn-add-to-cart');
+        btn.addEventListener('click', function (e) {
             e.preventDefault();
-            cartCount++;
-            updateCart();
-            var name = card.querySelector('.product-card__name');
-            showToast(name ? name.textContent + ' — ajoute au panier' : 'Ajoute au panier');
+            e.stopPropagation();
+            addToCart(product.id, 42);
+            showNotification('Ajouté au panier');
         });
-    });
-
-    /* --- Mobile menu --- */
-    var menuToggle = document.getElementById('menu-toggle');
-    var mobileMenu = document.getElementById('mobile-menu');
-
-    if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', function () {
-            var isOpen = mobileMenu.classList.toggle('is-open');
-            menuToggle.classList.toggle('is-active');
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
-
-        mobileMenu.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                mobileMenu.classList.remove('is-open');
-                menuToggle.classList.remove('is-active');
-                document.body.style.overflow = '';
-            });
-        });
+        return card;
     }
 
-    /* --- Navbar hide on scroll down, show on scroll up --- */
-    var navbar = document.getElementById('navbar');
-    var lastScrollY = window.scrollY;
-    var scrollThreshold = 10;
+    window.renderProductGrid = function (containerId, ids) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        ids.forEach(id => {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                container.appendChild(createProductCard(product));
+            }
+        });
+    };
 
-    function onScroll() {
-        var currentY = window.scrollY;
-        if (currentY < 60) {
-            navbar.classList.remove('navbar--hidden');
-            lastScrollY = currentY;
+    /* ===================== NOTIFICATION ===================== */
+    function showNotification(message) {
+        let notif = document.querySelector('.notification');
+        if (!notif) {
+            notif = document.createElement('div');
+            notif.className = 'notification';
+            document.body.appendChild(notif);
+        }
+        notif.textContent = message;
+        notif.classList.add('show');
+        setTimeout(() => notif.classList.remove('show'), 2000);
+    }
+
+    /* ===================== PRODUCT PAGE ===================== */
+    window.initProductPage = function () {
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'));
+        const product = products.find(p => p.id === id);
+
+        if (!product) {
+            window.location.href = 'shop.html';
             return;
         }
-        if (currentY - lastScrollY > scrollThreshold) {
-            navbar.classList.add('navbar--hidden');
-        } else if (lastScrollY - currentY > scrollThreshold) {
-            navbar.classList.remove('navbar--hidden');
-        }
-        lastScrollY = currentY;
+
+        document.title = product.name + ' — ÉDITION';
+
+        // Breadcrumb
+        document.getElementById('breadcrumb').innerHTML = `
+            <a href="shop.html">Collection</a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="shop.html">${product.brand}</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>${product.name}</span>
+        `;
+
+        // Product info
+        document.getElementById('productImage').src = product.img;
+        document.getElementById('productImage').alt = product.name;
+        document.getElementById('productBrand').textContent = product.brand;
+        document.getElementById('productName').textContent = product.name;
+        document.getElementById('productPrice').textContent = product.price + '\u00A0\u20AC';
+        document.getElementById('productDesc').textContent = product.desc;
+        document.getElementById('productStory').textContent = product.story;
+
+        // Size selector
+        let selectedSize = null;
+        const sizeButtons = document.querySelectorAll('.size-btn');
+        sizeButtons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                sizeButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedSize = parseInt(this.dataset.size);
+            });
+        });
+
+        // Add to cart
+        document.getElementById('addToCartDetail').addEventListener('click', function () {
+            if (!selectedSize) {
+                showNotification('Veuillez sélectionner une taille');
+                document.querySelector('.size-selector').classList.add('shake');
+                setTimeout(() => document.querySelector('.size-selector').classList.remove('shake'), 600);
+                return;
+            }
+            addToCart(product.id, selectedSize);
+            showNotification('Ajouté au panier');
+        });
+
+        // Related products
+        const relatedIds = products.filter(p => p.id !== product.id).sort(() => 0.5 - Math.random()).slice(0, 4).map(p => p.id);
+        renderProductGrid('relatedGrid', relatedIds);
+    };
+
+    /* ===================== SHOP SORT ===================== */
+    window.initShopSort = function () {
+        const select = document.getElementById('sortSelect');
+        if (!select) return;
+
+        select.addEventListener('change', function () {
+            const container = document.getElementById('shopGrid');
+            let sorted = [...products];
+
+            switch (this.value) {
+                case 'price-asc':
+                    sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name-asc':
+                    sorted.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    sorted.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                default:
+                    sorted.sort((a, b) => a.id - b.id);
+            }
+
+            renderProductGrid('shopGrid', sorted.map(p => p.id));
+        });
+    };
+
+    /* ===================== MOBILE MENU ===================== */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function () {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('open');
+            document.body.classList.toggle('menu-open');
+        });
+        // Close on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+                document.body.classList.remove('menu-open');
+            });
+        });
     }
 
-    var ticking = false;
-    window.addEventListener('scroll', function () {
-        if (!ticking) {
-            window.requestAnimationFrame(function () {
-                onScroll();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
+    /* ===================== NAVBAR SCROLL ===================== */
+    let lastScrollY = 0;
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+        window.addEventListener('scroll', function () {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 80) {
+                navbar.classList.add('navbar-hidden');
+            } else {
+                navbar.classList.remove('navbar-hidden');
+            }
+            if (currentScrollY > 10) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+            lastScrollY = currentScrollY;
+        }, { passive: true });
+    }
 
-    /* --- Newsletter form mock --- */
-    var newsletterForm = document.getElementById('newsletter-form');
+    /* ===================== NEWSLETTER ===================== */
+    const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            var input = newsletterForm.querySelector('.newsletter__input');
-            if (input && input.value) {
-                showToast('Inscription confirmee. Merci.');
+            const input = this.querySelector('input[type="email"]');
+            if (input.value) {
+                showNotification('Merci pour votre inscription !');
                 input.value = '';
             }
         });
     }
 
-    /* --- Sort functionality (shop page) --- */
-    var sortSelect = document.getElementById('sort-select');
-    if (sortSelect) {
-        sortSelect.addEventListener('change', function () {
-            var grid = document.querySelector('.shop-grid-section .product-grid');
-            if (!grid) return;
-            var cards = Array.from(grid.querySelectorAll('.product-card'));
-            var sorted;
-
-            if (this.value === 'price-asc') {
-                sorted = cards.sort(function (a, b) {
-                    return getPrice(a) - getPrice(b);
-                });
-            } else if (this.value === 'price-desc') {
-                sorted = cards.sort(function (a, b) {
-                    return getPrice(b) - getPrice(a);
-                });
-            } else {
-                sorted = cards;
-            }
-
-            sorted.forEach(function (card) {
-                grid.appendChild(card);
-            });
-        });
-    }
-
-    function getPrice(card) {
-        var attr = card.getAttribute('data-price');
-        if (attr) return parseFloat(attr);
-        var priceEl = card.querySelector('.product-card__price');
-        if (!priceEl) return 0;
-        return parseFloat(priceEl.textContent.replace(/[^\d]/g, ''));
-    }
+    /* ===================== INIT ===================== */
+    updateCartBadge();
 
 })();

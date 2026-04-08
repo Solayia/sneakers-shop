@@ -3,285 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDITION — Sneakers Premium</title>
+    <title>ÉDITION — L'art de la sneaker, édité pour vous</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
-        <div class="navbar__inner">
-            <a href="index.html" class="navbar__logo">EDITION</a>
-            <ul class="navbar__links">
-                <li><a href="shop.html">Collection</a></li>
-                <li><a href="shop.html">Nouveautes</a></li>
-                <li><a href="#">Marques</a></li>
-                <li><a href="#">Journal</a></li>
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-logo">ÉDITION</a>
+            <ul class="navbar-links" id="navLinks">
+                <li><a href="shop.html">COLLECTION</a></li>
+                <li><a href="shop.html">NOUVEAUTÉS</a></li>
+                <li><a href="#histoire">NOTRE HISTOIRE</a></li>
+                <li><a href="#journal">JOURNAL</a></li>
             </ul>
-            <div class="navbar__right">
-                <a href="#" class="navbar__icon">Recherche</a>
-                <a href="#" class="navbar__icon navbar__cart">Panier (<span id="cart-count">0</span>)</a>
-                <button class="navbar__hamburger" id="menu-toggle" aria-label="Menu">
-                    <span></span>
-                    <span></span>
+            <div class="navbar-actions">
+                <button class="icon-btn search-btn" aria-label="Rechercher">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+                <a href="#" class="icon-btn cart-btn" aria-label="Panier">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-        <div class="mobile-menu__inner">
-            <ul class="mobile-menu__links">
-                <li><a href="shop.html">Collection</a></li>
-                <li><a href="shop.html">Nouveautes</a></li>
-                <li><a href="#">Marques</a></li>
-                <li><a href="#">Journal</a></li>
-                <li><a href="#">Recherche</a></li>
-                <li><a href="#">Panier</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Hero -->
+    <!-- HERO -->
     <section class="hero">
-        <div class="hero__inner">
-            <div class="hero__content">
-                <h1 class="hero__title">Curated Sneakers for the Modern Connoisseur</h1>
-                <p class="hero__text">Une selection exigeante de sneakers premium. Livraison offerte, retours gratuits.</p>
-                <a href="shop.html" class="btn btn--primary">Explorer la collection</a>
+        <div class="hero-inner">
+            <div class="hero-text">
+                <span class="hero-label">SNEAKERS D'EXCEPTION</span>
+                <h1 class="hero-title">L'art de la sneaker, édité pour vous.</h1>
+                <p class="hero-desc">Nous sélectionnons les pièces les plus désirables de la sneaker culture. Chaque paire est authentifiée, chaque livraison soignée.</p>
+                <div class="hero-buttons">
+                    <a href="shop.html" class="btn btn-primary">Explorer la collection</a>
+                    <a href="#histoire" class="btn btn-outline">Notre histoire</a>
+                </div>
             </div>
-            <div class="hero__image">
-                <img src="img/sneaker-3.jpg" alt="Nike AF1 Shadow Pastel">
+            <div class="hero-image">
+                <img src="img/sneaker-3.jpg" alt="AF1 Shadow Pastel">
             </div>
         </div>
     </section>
 
-    <!-- Editorial Intro -->
-    <section class="editorial">
+    <!-- BRAND DNA -->
+    <section class="brand-dna">
         <div class="container">
-            <p class="editorial__text">Nous selectionnons les pieces les plus desirables de la sneaker culture contemporaine. Chaque modele est authentifie, chaque livraison soignee.</p>
-        </div>
-    </section>
-
-    <!-- Featured Products -->
-    <section class="section" id="selection">
-        <div class="container">
-            <h2 class="section__title">Selection</h2>
-            <div class="product-grid product-grid--2col">
-                <a href="#" class="product-card product-card--landscape" data-add-cart>
-                    <div class="product-card__image">
-                        <img src="img/sneaker-1.jpg" alt="Nike Free RN Flyknit">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__brand">Nike</span>
-                        <span class="product-card__name">Free RN Flyknit</span>
-                        <span class="product-card__price">149&euro;</span>
-                    </div>
-                </a>
-                <a href="#" class="product-card product-card--landscape" data-add-cart>
-                    <div class="product-card__image">
-                        <img src="img/sneaker-2.jpg" alt="Nike Air Force 1 Corduroy">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__brand">Nike</span>
-                        <span class="product-card__name">Air Force 1 Corduroy</span>
-                        <span class="product-card__price">139&euro;</span>
-                    </div>
-                </a>
-                <a href="#" class="product-card product-card--landscape" data-add-cart>
-                    <div class="product-card__image">
-                        <img src="img/sneaker-3.jpg" alt="Nike AF1 Shadow Pastel">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__brand">Nike</span>
-                        <span class="product-card__name">AF1 Shadow Pastel</span>
-                        <span class="product-card__price">129&euro;</span>
-                    </div>
-                </a>
-                <a href="#" class="product-card product-card--landscape" data-add-cart>
-                    <div class="product-card__image">
-                        <img src="img/sneaker-4.jpg" alt="Nike Air Max 1 Ultra">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__brand">Nike</span>
-                        <span class="product-card__name">Air Max 1 Ultra</span>
-                        <span class="product-card__price">159&euro;</span>
-                    </div>
-                </a>
+            <h2 class="section-title">Notre philosophie</h2>
+            <div class="dna-grid">
+                <div class="dna-item">
+                    <h3 class="dna-label">CURATION</h3>
+                    <p>Nous ne vendons pas des sneakers. Nous éditons une sélection. Chaque modèle est choisi pour son design, sa qualité et son histoire.</p>
+                </div>
+                <div class="dna-item">
+                    <h3 class="dna-label">AUTHENTICITÉ</h3>
+                    <p>Chaque paire passe entre les mains de nos experts. Zéro contrefaçon, zéro compromis.</p>
+                </div>
+                <div class="dna-item">
+                    <h3 class="dna-label">EXIGENCE</h3>
+                    <p>De l'emballage à la livraison, chaque détail compte. Recevoir une paire d'ÉDITION, c'est une expérience.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Full-width Banner -->
+    <!-- SÉLECTION -->
+    <section class="section-products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Sélection</h2>
+                <a href="shop.html" class="section-link">Tout voir &rarr;</a>
+            </div>
+            <div class="product-grid product-grid-2x2" id="featuredGrid"></div>
+        </div>
+    </section>
+
+    <!-- BANNER -->
     <section class="banner">
-        <img src="img/sneaker-5.jpg" alt="Collection Automne 2026" class="banner__image">
-        <div class="banner__overlay">
-            <span class="banner__label">Nouvelle collection</span>
-            <h2 class="banner__title">Automne 2026</h2>
-            <a href="shop.html" class="banner__link">Decouvrir</a>
+        <img src="img/sneaker-5.jpg" alt="Collection Automne 2026" class="banner-img">
+        <div class="banner-overlay">
+            <span class="banner-label">AUTOMNE 2026</span>
+            <h2 class="banner-title">Nouvelle collection Automne 2026</h2>
+            <a href="shop.html" class="banner-link">Découvrir</a>
         </div>
     </section>
 
-    <!-- New Arrivals -->
-    <section class="section">
+    <!-- NOUVEAUTÉS -->
+    <section class="section-products">
         <div class="container">
-            <h2 class="section__title">Nouveautes</h2>
-            <div class="product-grid product-grid--4col">
-                <a href="#" class="product-card" data-add-cart>
-                    <div class="product-card__image">
-                        <img src="img/sneaker-5.jpg" alt="Adidas Ultraboost 23">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__brand">Adidas</span>
-                        <span class="product-card__name">Ultraboost 23</span>
-                        <span class="product-card__price">189&euro;</span>
-                    </div>
-                </a>
-                <a href="#" class="product-card" data-add-cart>
-                    <div class="product-card__image">
-                        <img src="img/sneaker-6.jpg" alt="New Balance 550">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__brand">New Balance</span>
-                        <span class="product-card__name">550</span>
-                        <span class="product-card__price">129&euro;</span>
-                    </div>
-                </a>
-                <a href="#" class="product-card" data-add-cart>
-                    <div class="product-card__image">
-                        <img src="img/sneaker-7.jpg" alt="Puma Suede Classic">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__brand">Puma</span>
-                        <span class="product-card__name">Suede Classic</span>
-                        <span class="product-card__price">89&euro;</span>
-                    </div>
-                </a>
-                <a href="#" class="product-card" data-add-cart>
-                    <div class="product-card__image">
-                        <img src="img/sneaker-8.jpg" alt="Converse Chuck 70">
-                    </div>
-                    <div class="product-card__info">
-                        <span class="product-card__brand">Converse</span>
-                        <span class="product-card__name">Chuck 70</span>
-                        <span class="product-card__price">94&euro;</span>
-                    </div>
-                </a>
+            <div class="section-header">
+                <h2 class="section-title">Nouveautés</h2>
+                <a href="shop.html" class="section-link">Tout voir &rarr;</a>
+            </div>
+            <div class="product-grid product-grid-4" id="newGrid"></div>
+        </div>
+    </section>
+
+    <!-- NOTRE HISTOIRE -->
+    <section class="notre-histoire" id="histoire">
+        <div class="container">
+            <div class="histoire-grid">
+                <div class="histoire-left">
+                    <h2 class="histoire-title">Plus qu'une boutique, une destination.</h2>
+                </div>
+                <div class="histoire-right">
+                    <p>ÉDITION est née d'une conviction simple&nbsp;: acheter une sneaker premium devrait être une expérience à la hauteur du produit. Fondée par des passionnés de sneaker culture, notre maison sélectionne, authentifie et livre avec le même soin qu'un grand caviste choisirait ses bouteilles.</p>
+                    <p>Chaque paire qui entre dans notre catalogue a été portée, testée, approuvée par notre équipe.</p>
+                    <a href="#" class="text-link">En savoir plus &rarr;</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Strip -->
+    <!-- SERVICES -->
     <section class="services">
         <div class="container">
-            <div class="services__grid">
-                <div class="services__item">
-                    <h4 class="services__label">Authenticite garantie</h4>
-                    <p class="services__desc">Chaque paire est verifiee par nos experts avant expedition.</p>
+            <div class="services-grid">
+                <div class="service-item">
+                    <span class="service-label">AUTHENTICITÉ VÉRIFIÉE</span>
+                    <p>Chaque paire inspectée par nos experts</p>
                 </div>
-                <div class="services__item">
-                    <h4 class="services__label">Livraison express</h4>
-                    <p class="services__desc">Expedition sous 24h, livraison en 2-3 jours ouvrables.</p>
+                <div class="service-item">
+                    <span class="service-label">LIVRAISON 24-48H</span>
+                    <p>Expédition express sur toute la France</p>
                 </div>
-                <div class="services__item">
-                    <h4 class="services__label">Retours 30 jours</h4>
-                    <p class="services__desc">Retours gratuits sous 30 jours, sans condition.</p>
+                <div class="service-item">
+                    <span class="service-label">RETOURS GRATUITS 30J</span>
+                    <p>Satisfait ou remboursé, sans question</p>
                 </div>
-                <div class="services__item">
-                    <h4 class="services__label">Paiement securise</h4>
-                    <p class="services__desc">Transactions chiffrees, vos donnees sont protegees.</p>
+                <div class="service-item">
+                    <span class="service-label">PAIEMENT SÉCURISÉ</span>
+                    <p>Transactions cryptées et protégées</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Journal Teaser -->
-    <section class="section section--cream">
+    <!-- NEWSLETTER -->
+    <section class="newsletter" id="journal">
         <div class="container">
-            <h2 class="section__title">Journal</h2>
-            <div class="journal-grid">
-                <a href="#" class="journal-card">
-                    <div class="journal-card__image">
-                        <div class="journal-card__placeholder"></div>
-                    </div>
-                    <div class="journal-card__info">
-                        <span class="journal-card__date">28 Mars 2026</span>
-                        <h3 class="journal-card__title">L'evolution de la sneaker dans la mode contemporaine</h3>
-                        <span class="journal-card__link">Lire</span>
-                    </div>
-                </a>
-                <a href="#" class="journal-card">
-                    <div class="journal-card__image">
-                        <div class="journal-card__placeholder journal-card__placeholder--alt"></div>
-                    </div>
-                    <div class="journal-card__info">
-                        <span class="journal-card__date">15 Mars 2026</span>
-                        <h3 class="journal-card__title">Guide : comment entretenir vos sneakers premium</h3>
-                        <span class="journal-card__link">Lire</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter -->
-    <section class="newsletter">
-        <div class="container">
-            <div class="newsletter__inner">
-                <p class="newsletter__text">Restez informe des dernieres sorties et editions exclusives.</p>
-                <form class="newsletter__form" id="newsletter-form">
-                    <input type="email" class="newsletter__input" placeholder="Votre adresse email" required>
-                    <button type="submit" class="btn btn--primary">S'inscrire</button>
+            <div class="newsletter-inner">
+                <h2 class="newsletter-title">Restez informé</h2>
+                <p class="newsletter-desc">Restez informé des dernières sorties et éditions exclusives.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Votre adresse e-mail" required>
+                    <button type="submit" class="btn btn-primary">S'inscrire</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer__grid">
-                <div class="footer__col">
-                    <a href="index.html" class="footer__logo">EDITION</a>
-                    <p class="footer__tagline">Sneakers premium, selectionnees avec exigence.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">ÉDITION</a>
+                    <p class="footer-tagline">L'art de la sneaker, édité pour vous.</p>
                 </div>
-                <div class="footer__col">
-                    <h4 class="footer__heading">Navigation</h4>
-                    <ul class="footer__links">
+                <div class="footer-col">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul>
                         <li><a href="shop.html">Collection</a></li>
-                        <li><a href="shop.html">Nouveautes</a></li>
-                        <li><a href="#">Marques</a></li>
-                        <li><a href="#">Journal</a></li>
+                        <li><a href="shop.html">Nouveautés</a></li>
+                        <li><a href="#histoire">Notre histoire</a></li>
+                        <li><a href="#journal">Journal</a></li>
                     </ul>
                 </div>
-                <div class="footer__col">
-                    <h4 class="footer__heading">Service client</h4>
-                    <ul class="footer__links">
+                <div class="footer-col">
+                    <h4 class="footer-heading">Service client</h4>
+                    <ul>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Livraison</a></li>
                         <li><a href="#">Retours</a></li>
-                        <li><a href="#">Suivi de commande</a></li>
+                        <li><a href="#">Guide des tailles</a></li>
                     </ul>
                 </div>
-                <div class="footer__col">
-                    <h4 class="footer__heading">Contact</h4>
-                    <ul class="footer__links">
-                        <li><a href="mailto:contact@edition.com">contact@edition.com</a></li>
-                        <li><a href="#">+33 1 42 00 00 00</a></li>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact</h4>
+                    <ul>
+                        <li><a href="mailto:contact@edition-store.fr">contact@edition-store.fr</a></li>
                         <li><a href="#">Instagram</a></li>
+                        <li><a href="tel:+33142000000">+33 1 42 00 00 00</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer__bottom">
-                <p>2026 EDITION. Tous droits reserves.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ÉDITION. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        renderProductGrid('featuredGrid', [1,2,3,4]);
+        renderProductGrid('newGrid', [5,6,7,8]);
+    </script>
 </body>
 </html>
