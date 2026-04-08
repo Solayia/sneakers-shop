@@ -1,10 +1,10 @@
-/* ===== SNKRS STORE — Main Script ===== */
+/* ===== SNKRS STORE — Luxury Edition Script ===== */
 
 (function () {
   'use strict';
 
   // ---- Cart state ----
-  let cartCount = 0;
+  var cartCount = 0;
 
   function updateCartBadge() {
     document.querySelectorAll('.cart-badge').forEach(function (badge) {
@@ -33,7 +33,6 @@
       });
     }
 
-    // Close on link click
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('active');
@@ -42,7 +41,7 @@
     });
   }
 
-  // ---- Add to cart ----
+  // ---- Add to cart with luxury feedback ----
   function initAddToCart() {
     document.addEventListener('click', function (e) {
       var btn = e.target.closest('.js-add-to-cart');
@@ -51,19 +50,28 @@
       cartCount++;
       updateCartBadge();
 
+      // Animate cart badge
+      var badges = document.querySelectorAll('.cart-badge');
+      badges.forEach(function (badge) {
+        badge.style.transform = 'scale(1.4)';
+        setTimeout(function () {
+          badge.style.transform = 'scale(1)';
+        }, 200);
+      });
+
       // Button feedback
       var originalText = btn.textContent;
       btn.textContent = 'Ajout\u00e9 !';
-      btn.classList.remove('btn--dark');
-      btn.classList.add('btn--accent');
+      btn.classList.remove('btn--gold-outline');
+      btn.classList.add('btn--gold');
       btn.disabled = true;
 
       setTimeout(function () {
         btn.textContent = originalText;
-        btn.classList.remove('btn--accent');
-        btn.classList.add('btn--dark');
+        btn.classList.remove('btn--gold');
+        btn.classList.add('btn--gold-outline');
         btn.disabled = false;
-      }, 1200);
+      }, 1500);
     });
   }
 
@@ -103,7 +111,9 @@
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
       anchor.addEventListener('click', function (e) {
-        var target = document.querySelector(this.getAttribute('href'));
+        var href = this.getAttribute('href');
+        if (href === '#') return;
+        var target = document.querySelector(href);
         if (target) {
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -112,16 +122,77 @@
     });
   }
 
-  // ---- Navbar shadow on scroll ----
-  function initScrollShadow() {
+  // ---- Navbar style on scroll ----
+  function initNavbarScroll() {
     var navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 10) {
-        navbar.style.boxShadow = '0 1px 8px rgba(0,0,0,0.06)';
+    function onScroll() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
       } else {
-        navbar.style.boxShadow = 'none';
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ---- Scroll reveal animations (IntersectionObserver) ----
+  function initScrollReveal() {
+    var revealElements = document.querySelectorAll('.reveal');
+    if (!revealElements.length) return;
+
+    // Stagger delay for grid items
+    var grids = document.querySelectorAll('.products-grid, .categories-grid, .reassurance-grid');
+    grids.forEach(function (grid) {
+      var items = grid.querySelectorAll('.reveal');
+      items.forEach(function (item, index) {
+        item.style.transitionDelay = (index * 0.08) + 's';
+      });
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealElements.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  // ---- Hero parallax effect ----
+  function initHeroParallax() {
+    var heroBg = document.querySelector('.hero__bg');
+    if (!heroBg) return;
+
+    var ticking = false;
+
+    function updateParallax() {
+      var scrollY = window.scrollY;
+      var heroHeight = heroBg.parentElement.offsetHeight;
+
+      if (scrollY < heroHeight) {
+        var translate = scrollY * 0.3;
+        var scale = 1.1 + (scrollY * 0.0002);
+        heroBg.style.transform = 'scale(' + scale + ') translateY(' + translate + 'px)';
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
       }
     }, { passive: true });
   }
@@ -134,6 +205,8 @@
     initFilters();
     initNewsletter();
     initSmoothScroll();
-    initScrollShadow();
+    initNavbarScroll();
+    initScrollReveal();
+    initHeroParallax();
   });
 })();
