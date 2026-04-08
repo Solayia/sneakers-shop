@@ -103,7 +103,7 @@
                     <span class="product-card-price">${product.price}\u00A0\u20AC</span>
                 </div>
             </a>
-            <button class="btn-add-to-cart" data-id="${product.id}">CHOISIR MA TAILLE</button>
+            <button class="btn-add-to-cart" data-id="${product.id}">EN SAVOIR PLUS</button>
         `;
         // Click on entire card or button → go to product page to select size
         card.querySelector('.btn-add-to-cart').addEventListener('click', function (e) {
