@@ -109,8 +109,7 @@
         btn.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            addToCart(product.id, 42);
-            showNotification('Ajouté au panier');
+            window.location.href = 'product.html?id=' + product.id;
         });
         return card;
     }
@@ -126,6 +125,148 @@
             }
         });
     };
+
+    /* ===================== CART PANEL ===================== */
+    function createCartPanel() {
+        const overlay = document.createElement('div');
+        overlay.className = 'cart-overlay';
+        overlay.id = 'cartOverlay';
+
+        const panel = document.createElement('div');
+        panel.className = 'cart-panel';
+        panel.id = 'cartPanel';
+        panel.innerHTML = `
+            <div class="cart-panel-header">
+                <h3>PANIER</h3>
+                <button class="cart-panel-close" id="cartClose">&times;</button>
+            </div>
+            <div class="cart-panel-body" id="cartBody"></div>
+            <div class="cart-panel-footer" id="cartFooter"></div>
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(panel);
+
+        overlay.addEventListener('click', closeCartPanel);
+        document.getElementById('cartClose').addEventListener('click', closeCartPanel);
+    }
+
+    function openCartPanel() {
+        const overlay = document.getElementById('cartOverlay');
+        const panel = document.getElementById('cartPanel');
+        if (!overlay || !panel) return;
+        renderCartPanel();
+        overlay.classList.add('open');
+        panel.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCartPanel() {
+        const overlay = document.getElementById('cartOverlay');
+        const panel = document.getElementById('cartPanel');
+        if (!overlay || !panel) return;
+        overlay.classList.remove('open');
+        panel.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function renderCartPanel() {
+        const cart = getCart();
+        const body = document.getElementById('cartBody');
+        const footer = document.getElementById('cartFooter');
+        if (!body || !footer) return;
+
+        if (cart.length === 0) {
+            body.innerHTML = '<p class="cart-empty">Votre panier est vide.</p>';
+            footer.innerHTML = '';
+            return;
+        }
+
+        let html = '';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const product = products.find(p => p.id === item.id);
+            if (!product) return;
+            const itemTotal = product.price * item.qty;
+            total += itemTotal;
+
+            html += `
+                <div class="cart-item">
+                    <img src="${product.img}" alt="${product.name}" class="cart-item-img">
+                    <div class="cart-item-info">
+                        <span class="cart-item-brand">${product.brand}</span>
+                        <span class="cart-item-name">${product.name}</span>
+                        <span class="cart-item-size">Taille ${item.size}</span>
+                        <span class="cart-item-price">${product.price}\u00A0\u20AC</span>
+                    </div>
+                    <div class="cart-item-actions">
+                        <div class="cart-item-qty">
+                            <button class="qty-btn" data-index="${index}" data-action="minus">&minus;</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" data-index="${index}" data-action="plus">&plus;</button>
+                        </div>
+                        <button class="cart-item-remove" data-index="${index}">&times; Retirer</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        body.innerHTML = html;
+        footer.innerHTML = `
+            <div class="cart-total">
+                <span>Total</span>
+                <span>${total}\u00A0\u20AC</span>
+            </div>
+            <button class="btn btn-primary cart-checkout-btn">VALIDER LA COMMANDE</button>
+            <p class="cart-footer-note">Livraison offerte dès 100\u00A0\u20AC d'achat</p>
+        `;
+
+        // Qty buttons
+        body.querySelectorAll('.qty-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const cart = getCart();
+                const idx = parseInt(this.dataset.index);
+                if (this.dataset.action === 'plus') {
+                    cart[idx].qty += 1;
+                } else if (this.dataset.action === 'minus') {
+                    cart[idx].qty -= 1;
+                    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+                }
+                saveCart(cart);
+                renderCartPanel();
+            });
+        });
+
+        // Remove buttons
+        body.querySelectorAll('.cart-item-remove').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const cart = getCart();
+                const idx = parseInt(this.dataset.index);
+                cart.splice(idx, 1);
+                saveCart(cart);
+                renderCartPanel();
+            });
+        });
+
+        // Checkout
+        footer.querySelector('.cart-checkout-btn').addEventListener('click', () => {
+            showNotification('Merci ! Commande en cours de traitement.');
+            saveCart([]);
+            renderCartPanel();
+        });
+    }
+
+    // Init cart panel
+    createCartPanel();
+
+    // Cart button click
+    document.querySelectorAll('.cart-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            openCartPanel();
+        });
+    });
 
     /* ===================== NOTIFICATION ===================== */
     function showNotification(message) {
@@ -191,7 +332,8 @@
                 return;
             }
             addToCart(product.id, selectedSize);
-            showNotification('Ajouté au panier');
+            showNotification(product.name + ' ajouté au panier');
+            setTimeout(() => openCartPanel(), 300);
         });
 
         // Related products
