@@ -1,376 +1,207 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toutes nos Sneakers &mdash; SNKRS STORE</title>
-  <meta name="description" content="Decouvrez notre catalogue complet de sneakers authentiques. Nike, Adidas, New Balance, Puma et plus.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection — EDITION</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ===== ANNOUNCEMENT BAR ===== -->
-<div class="announcement-bar">
-  <div class="announcement-bar__track">
-    <span>LIVRAISON GRATUITE des 100&euro; d'achat &nbsp;&bull;&nbsp; Retours sous 30 jours &nbsp;&bull;&nbsp; Authenticit&eacute; garantie &nbsp;&bull;&nbsp; LIVRAISON GRATUITE des 100&euro; d'achat &nbsp;&bull;&nbsp; Retours sous 30 jours &nbsp;&bull;&nbsp; Authenticit&eacute; garantie &nbsp;&bull;&nbsp;</span>
-    <span>LIVRAISON GRATUITE des 100&euro; d'achat &nbsp;&bull;&nbsp; Retours sous 30 jours &nbsp;&bull;&nbsp; Authenticit&eacute; garantie &nbsp;&bull;&nbsp; LIVRAISON GRATUITE des 100&euro; d'achat &nbsp;&bull;&nbsp; Retours sous 30 jours &nbsp;&bull;&nbsp; Authenticit&eacute; garantie &nbsp;&bull;&nbsp;</span>
-  </div>
-</div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar__inner">
+            <a href="index.html" class="navbar__logo">EDITION</a>
+            <ul class="navbar__links">
+                <li><a href="shop.html">Collection</a></li>
+                <li><a href="shop.html">Nouveautes</a></li>
+                <li><a href="#">Marques</a></li>
+                <li><a href="#">Journal</a></li>
+            </ul>
+            <div class="navbar__right">
+                <a href="#" class="navbar__icon">Recherche</a>
+                <a href="#" class="navbar__icon navbar__cart">Panier (<span id="cart-count">0</span>)</a>
+                <button class="navbar__hamburger" id="menu-toggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar">
-  <div class="container">
-    <a href="index.html" class="navbar__logo">SNKRS <span>STORE</span></a>
-
-    <ul class="navbar__links">
-      <li><a href="shop.html">Nouveaut&eacute;s</a></li>
-      <li><a href="shop.html">Homme</a></li>
-      <li><a href="shop.html">Femme</a></li>
-      <li><a href="shop.html">Marques</a></li>
-      <li><a href="shop.html">Promos</a></li>
-    </ul>
-
-    <div class="navbar__icons">
-      <button type="button" aria-label="Rechercher">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
-      <a href="#" aria-label="Panier">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span class="cart-badge">0</span>
-      </a>
-      <button class="hamburger" type="button" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<!-- ===== MOBILE MENU ===== -->
-<div class="mobile-menu">
-  <div class="mobile-menu__header">
-    <span class="navbar__logo">SNKRS <span>STORE</span></span>
-    <button class="mobile-menu__close" type="button" aria-label="Fermer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <ul class="mobile-menu__links">
-    <li><a href="shop.html">Nouveaut&eacute;s</a></li>
-    <li><a href="shop.html">Homme</a></li>
-    <li><a href="shop.html">Femme</a></li>
-    <li><a href="shop.html">Marques</a></li>
-    <li><a href="shop.html">Promos</a></li>
-  </ul>
-</div>
-
-<!-- ===== SHOP HERO ===== -->
-<section class="shop-hero">
-  <div class="container">
-    <span class="section__subtitle">Catalogue</span>
-    <h1>Toutes nos <span class="gold">Sneakers</span></h1>
-    <span class="shop-hero__count">(64 modeles)</span>
-  </div>
-</section>
-
-<!-- ===== FILTER BAR ===== -->
-<div class="filter-bar">
-  <div class="container">
-    <span class="filter-bar__label">Filtres :</span>
-
-    <select class="filter-select" name="sort" aria-label="Trier par">
-      <option value="popular">Trier : Populaires</option>
-      <option value="price-asc">Prix croissant</option>
-      <option value="price-desc">Prix d&eacute;croissant</option>
-      <option value="newest">Nouveaut&eacute;s</option>
-    </select>
-
-    <select class="filter-select" name="brand" aria-label="Filtrer par marque">
-      <option value="">Marque : Toutes</option>
-      <option value="nike">Nike</option>
-      <option value="adidas">Adidas</option>
-      <option value="new-balance">New Balance</option>
-      <option value="puma">Puma</option>
-      <option value="converse">Converse</option>
-      <option value="reebok">Reebok</option>
-    </select>
-
-    <select class="filter-select" name="size" aria-label="Filtrer par taille">
-      <option value="">Taille : Toutes</option>
-      <option value="38">38</option>
-      <option value="39">39</option>
-      <option value="40">40</option>
-      <option value="41">41</option>
-      <option value="42">42</option>
-      <option value="43">43</option>
-      <option value="44">44</option>
-      <option value="45">45</option>
-      <option value="46">46</option>
-    </select>
-  </div>
-</div>
-
-<!-- ===== PRODUCT GRID ===== -->
-<section class="section">
-  <div class="container">
-    <div class="products-grid">
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="img/sneaker-1.jpg" alt="Nike Air Max 90 - sneaker premium" loading="lazy">
-          <span class="product-card__badge">New</span>
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Nike Air Max 90">Quick View</button>
-          </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu__inner">
+            <ul class="mobile-menu__links">
+                <li><a href="shop.html">Collection</a></li>
+                <li><a href="shop.html">Nouveautes</a></li>
+                <li><a href="#">Marques</a></li>
+                <li><a href="#">Journal</a></li>
+                <li><a href="#">Recherche</a></li>
+                <li><a href="#">Panier</a></li>
+            </ul>
         </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Nike</div>
-          <div class="product-card__name">Air Max 90</div>
-          <div class="product-card__price">149,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="img/sneaker-2.jpg" alt="Adidas Ultraboost 23 - sneaker premium" loading="lazy">
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Adidas Ultraboost 23">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Adidas</div>
-          <div class="product-card__name">Ultraboost 23</div>
-          <div class="product-card__price">189,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="img/sneaker-3.jpg" alt="New Balance 550 - sneaker premium" loading="lazy">
-          <span class="product-card__badge">New</span>
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide New Balance 550">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">New Balance</div>
-          <div class="product-card__name">550</div>
-          <div class="product-card__price">129,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="img/sneaker-4.jpg" alt="Nike Dunk Low - sneaker premium" loading="lazy">
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Nike Dunk Low">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Nike</div>
-          <div class="product-card__name">Dunk Low</div>
-          <div class="product-card__price">119,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="img/sneaker-5.jpg" alt="Puma Suede Classic - sneaker premium" loading="lazy">
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Puma Suede Classic">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Puma</div>
-          <div class="product-card__name">Suede Classic</div>
-          <div class="product-card__price">89,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="img/sneaker-6.jpg" alt="Adidas Samba OG - sneaker premium" loading="lazy">
-          <span class="product-card__badge">-20%</span>
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Adidas Samba OG">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Adidas</div>
-          <div class="product-card__name">Samba OG</div>
-          <div class="product-card__price">87,99&euro; <span class="old-price">109,99&euro;</span></div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="img/sneaker-7.jpg" alt="Converse Chuck 70 - sneaker premium" loading="lazy">
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Converse Chuck 70">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Converse</div>
-          <div class="product-card__name">Chuck 70</div>
-          <div class="product-card__price">94,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="img/sneaker-8.jpg" alt="Reebok Club C 85 - sneaker premium" loading="lazy">
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Reebok Club C 85">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Reebok</div>
-          <div class="product-card__name">Club C 85</div>
-          <div class="product-card__price">99,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&q=80" alt="Nike Air Force 1 - sneaker premium" loading="lazy">
-          <span class="product-card__badge">-30%</span>
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Nike Air Force 1">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Nike</div>
-          <div class="product-card__name">Air Force 1 '07</div>
-          <div class="product-card__price">83,99&euro; <span class="old-price">119,99&euro;</span></div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="https://images.unsplash.com/photo-1539185441755-769473a23570?w=500&q=80" alt="New Balance 574 Core - sneaker premium" loading="lazy">
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide New Balance 574">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">New Balance</div>
-          <div class="product-card__name">574 Core</div>
-          <div class="product-card__price">109,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500&q=80" alt="Puma RS-X - sneaker premium" loading="lazy">
-          <span class="product-card__badge">New</span>
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Puma RS-X">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Puma</div>
-          <div class="product-card__name">RS-X</div>
-          <div class="product-card__price">119,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
-      <div class="product-card reveal">
-        <div class="product-card__image-wrap">
-          <img src="https://images.unsplash.com/photo-1584735175315-9d5df23860e6?w=500&q=80" alt="Adidas Stan Smith - sneaker premium" loading="lazy">
-          <div class="product-card__quick-view">
-            <button class="btn btn--gold btn--sm" aria-label="Vue rapide Adidas Stan Smith">Quick View</button>
-          </div>
-        </div>
-        <div class="product-card__info">
-          <div class="product-card__brand">Adidas</div>
-          <div class="product-card__name">Stan Smith</div>
-          <div class="product-card__price">99,99&euro;</div>
-          <button class="btn btn--gold-outline btn--sm btn--full js-add-to-cart">Ajouter au panier</button>
-        </div>
-      </div>
-
     </div>
 
-    <div class="load-more">
-      <button class="btn btn--gold-outline">Charger Plus</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer__grid">
-
-      <div class="footer__brand">
-        <div class="footer__brand-name">SNKRS <span>STORE</span></div>
-        <p>Votre destination pour les sneakers authentiques. Les derni&egrave;res releases et les classiques intemporels, dans un &eacute;crin de luxe.</p>
-        <div class="footer__social">
-          <a href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="#" aria-label="Twitter">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-          </a>
-          <a href="#" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
-          </a>
+    <!-- Shop Header -->
+    <section class="shop-header">
+        <div class="container">
+            <div class="shop-header__inner">
+                <div class="shop-header__left">
+                    <h1 class="shop-header__title">Collection</h1>
+                    <span class="shop-header__count">(32 pieces)</span>
+                </div>
+                <div class="shop-header__right">
+                    <select class="shop-header__sort" id="sort-select">
+                        <option value="default">Par defaut</option>
+                        <option value="price-asc">Prix croissant</option>
+                        <option value="price-desc">Prix decroissant</option>
+                    </select>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="footer__col">
-        <h4>Boutique</h4>
-        <a href="shop.html">Homme</a>
-        <a href="shop.html">Femme</a>
-        <a href="shop.html">Promos</a>
-        <a href="shop.html">Nouveaut&eacute;s</a>
-      </div>
+    <!-- Product Grid -->
+    <section class="shop-grid-section">
+        <div class="container">
+            <div class="product-grid product-grid--4col">
+                <a href="#" class="product-card" data-add-cart data-price="149">
+                    <div class="product-card__image">
+                        <img src="img/sneaker-1.jpg" alt="Nike Free RN Flyknit">
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__brand">Nike</span>
+                        <span class="product-card__name">Free RN Flyknit</span>
+                        <span class="product-card__price">149&euro;</span>
+                    </div>
+                </a>
+                <a href="#" class="product-card" data-add-cart data-price="139">
+                    <div class="product-card__image">
+                        <img src="img/sneaker-2.jpg" alt="Nike Air Force 1 Corduroy">
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__brand">Nike</span>
+                        <span class="product-card__name">Air Force 1 Corduroy</span>
+                        <span class="product-card__price">139&euro;</span>
+                    </div>
+                </a>
+                <a href="#" class="product-card" data-add-cart data-price="129">
+                    <div class="product-card__image">
+                        <img src="img/sneaker-3.jpg" alt="Nike AF1 Shadow Pastel">
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__brand">Nike</span>
+                        <span class="product-card__name">AF1 Shadow Pastel</span>
+                        <span class="product-card__price">129&euro;</span>
+                    </div>
+                </a>
+                <a href="#" class="product-card" data-add-cart data-price="159">
+                    <div class="product-card__image">
+                        <img src="img/sneaker-4.jpg" alt="Nike Air Max 1 Ultra">
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__brand">Nike</span>
+                        <span class="product-card__name">Air Max 1 Ultra</span>
+                        <span class="product-card__price">159&euro;</span>
+                    </div>
+                </a>
+                <a href="#" class="product-card" data-add-cart data-price="189">
+                    <div class="product-card__image">
+                        <img src="img/sneaker-5.jpg" alt="Adidas Ultraboost 23">
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__brand">Adidas</span>
+                        <span class="product-card__name">Ultraboost 23</span>
+                        <span class="product-card__price">189&euro;</span>
+                    </div>
+                </a>
+                <a href="#" class="product-card" data-add-cart data-price="129">
+                    <div class="product-card__image">
+                        <img src="img/sneaker-6.jpg" alt="New Balance 550">
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__brand">New Balance</span>
+                        <span class="product-card__name">550</span>
+                        <span class="product-card__price">129&euro;</span>
+                    </div>
+                </a>
+                <a href="#" class="product-card" data-add-cart data-price="89">
+                    <div class="product-card__image">
+                        <img src="img/sneaker-7.jpg" alt="Puma Suede Classic">
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__brand">Puma</span>
+                        <span class="product-card__name">Suede Classic</span>
+                        <span class="product-card__price">89&euro;</span>
+                    </div>
+                </a>
+                <a href="#" class="product-card" data-add-cart data-price="94">
+                    <div class="product-card__image">
+                        <img src="img/sneaker-8.jpg" alt="Converse Chuck 70">
+                    </div>
+                    <div class="product-card__info">
+                        <span class="product-card__brand">Converse</span>
+                        <span class="product-card__name">Chuck 70</span>
+                        <span class="product-card__price">94&euro;</span>
+                    </div>
+                </a>
+            </div>
 
-      <div class="footer__col">
-        <h4>Aide</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Livraison</a>
-        <a href="#">Retours</a>
-        <a href="#">Guide des tailles</a>
-      </div>
+            <!-- Pagination -->
+            <nav class="pagination">
+                <span class="pagination__item pagination__item--active">1</span>
+                <a href="#" class="pagination__item">2</a>
+                <a href="#" class="pagination__item">3</a>
+                <a href="#" class="pagination__item pagination__next">Suivant &rarr;</a>
+            </nav>
+        </div>
+    </section>
 
-      <div class="footer__col">
-        <h4>L&eacute;gal</h4>
-        <a href="#">Mentions l&eacute;gales</a>
-        <a href="#">CGV</a>
-        <a href="#">Confidentialit&eacute;</a>
-      </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__col">
+                    <a href="index.html" class="footer__logo">EDITION</a>
+                    <p class="footer__tagline">Sneakers premium, selectionnees avec exigence.</p>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__heading">Navigation</h4>
+                    <ul class="footer__links">
+                        <li><a href="shop.html">Collection</a></li>
+                        <li><a href="shop.html">Nouveautes</a></li>
+                        <li><a href="#">Marques</a></li>
+                        <li><a href="#">Journal</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__heading">Service client</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Suivi de commande</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4 class="footer__heading">Contact</h4>
+                    <ul class="footer__links">
+                        <li><a href="mailto:contact@edition.com">contact@edition.com</a></li>
+                        <li><a href="#">+33 1 42 00 00 00</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>2026 EDITION. Tous droits reserves.</p>
+            </div>
+        </div>
+    </footer>
 
-      <div class="footer__col">
-        <h4>Contact</h4>
-        <a href="mailto:hello@snkrs-store.fr">hello@snkrs-store.fr</a>
-      </div>
-
-    </div>
-
-    <div class="footer__bottom">
-      <span>&copy; 2026 SNKRS STORE. Tous droits r&eacute;serv&eacute;s.</span>
-      <div>
-        <a href="#">Mentions l&eacute;gales</a>
-        <a href="#">CGV</a>
-        <a href="#">Confidentialit&eacute;</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
